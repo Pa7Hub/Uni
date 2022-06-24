@@ -1,0 +1,11 @@
+1. SELECT * FROM kunde WHERE Anrede == 'Herr'
+2. SELECT * FROM auftrag WHERE Status == 'offen'
+3. SELECT ARID, Farbe, Artikelbezeichnung FROM artikel WHERE Farbe == "schwarz"
+4. SELECT DISTINCT Farbe FROM artikel WHERE Farbe != "schwarz"
+5. SELECT DISTINCT Positionswert FROM auftragsposition WHERE Positionswert > 180 ORDER BY Positionswert DESC
+6. SELECT PLZ, KID FROM kunde WHERE PLZ > 80500
+7. SELECT * FROM kunde WHERE kunde.name LIKE '%ei%'
+8. SELECT LID, Name FROM lieferant WHERE Name LIKE 'm%'
+9. SELECT KID, Name, Straße FROM kunde WHERE Straße LIKE '_an%'
+10. SELECT ARID, Größe FROM artikel WHERE CONTAINS(Größe, "x") ?? (alternative mit Größe LIKE '%x%')
+11. SELECT APID, AID, Einzelpreisrabatt FROM auftragsposition WHERE Einzelpreisrabatt >= 5

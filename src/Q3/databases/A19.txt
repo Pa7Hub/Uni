@@ -1,0 +1,16 @@
+1. SELECT Name, Vorname (, kunde.KGID) FROM kunde JOIN kundengruppe WHERE kunde.KGID == kundengruppe.KGID  (Könnte man hier nicht einfach gucken, ob Kunde.KGID IS NOT NULL true ist? Weil er wird ja sicherlich eine KGID haben, wenn er in der Kundengruppe eingetragen ist...)
+2. SELECT * FROM auftrag WHERE auftrag.MID IS NULL
+3. SELECT A.KID, K.Name, AP.Einzelpreisrabatt FROM auftrag AS A INNER JOIN kunde AS K ON A.KID == K.KID INNER JOIN auftragsposition AS AP ON A.AID == AP.AID WHERE AP.AID IS NOT NULL ORDER BY K.name DESC (bruh)
+4. SELECT artikel.LID, artikel.Artikelbezeichnung FROM artikel INNER JOIN lieferant ON artikel.LID == lieferant.LID WHERE artikel.Artikelbezeichnung == "Scanner"
+5. SELECT abteilung.Bezeichnung, abteilung.ABID , mitarbeiter.Name FROM abteilung INNER JOIN mitarbeiter ON abteilung.ABID == mitarbeiter.ABID ORDER BY abteilung.Bezeichnung
+6. SELECT AP.APID, AP.Einzelpreisrabatt, K.KID, K.Name FROM auftrag as A LEFT JOIN auftragsposition AS AP ON A.AID == AP.AID LEFT JOIN kunde as K ON A.KID == K.KID ORDER BY AP.APID (Ob Einzelpreis == null || == notNull ist egal, wir geben es einfach trzd. aus)
+7. SELECT kunde.KID, auftragsposition.Einzelpreisrabatt FROM auftrag LEFT JOIN auftragsposition ON auftrag.AID == auftragsposition.AID LEFT JOIN kunde ON auftrag.AID == kunde.AID (??????)
+7. SELECT kunde.KID, auftrag.Status FROM auftrag LEFT JOIN kunde ON auftrag.AID == kunde.AID (??????)
+8.
+    => Alle kundengruppen, dessen KGID auf keine Kunden zeigt. Mit kundengruppe.KGID != kunde.KGID funktioniert das aber nicht, weil er dann trzd. alle rein nimmt. Hä??
+    => SELECT Name, Vorname FROM kunde WHERE kunde.KGID IS NULL || SELECT Name, Vorname FROM kunde WHERE kunde.KGID IS NOT NULL (das ist sicherlich nicht so gemeint, aber so würde es auch funktionieren)
+9. (Vorgesetzte wahrscheinlich die, die eine MID_2 besitzen, oder?!)
+    => SELECT M.Name, M.Vorname, V.Name, V.Vorname FROM mitarbeiter AS V WHERE M.MID_2 IS NOT NULL LEFT JOIN mitarbeiter AS M ON V.MID_2 = M.MID_1 AND V.ABID = M.ABID
+10. SELECT M.Name, M.Vorname, V.Name, V.Vorname FROM mitarbeiter AS V WHERE M.MID_2 IS NOT NULL LEFT JOIN auftrag ON V.MID_1 = auftrag.MID LEFT JOIN mitarbeiter AS M ON V.MID_2 = M.MID_1 (Ich glaube die Variante ist nicht richtig, das returned einfach alle Vorgesetzten, die mal einen Auftrag hatten und alle Mitarbeiter, die diesen Vorgesetzten MAL zugeordnet waren/sind)
+    => SELECT M.Name, M.Vorname, V.Name, V.Vorname FROM mitarbeiter AS V WHERE M.MID_2 IS NOT NULL LEFT JOIN mitarbeiter AS M ON V.MID_2 = M.MID_1 LEFT JOIN auftrag ON CONTAINS(auftrag.MID, V.MID_2) AND CONTAINS (auftrag.MID, M.MID_1)
+    (zweite ist wahrscheinlich die bessere, da die MID des Auftrags eine Menge an IDs ist, die auf mehrere Mitarbeiter zeigt. Wir sortieren also erst alle Vorgesetzten + Mitarbeiter und gucken dann, in welchen Aufträgen aktuell beide drin sind)

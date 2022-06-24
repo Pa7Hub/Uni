@@ -1,0 +1,12 @@
+Also ich hab Herrn Köpp eine E-Mail geschrieben nachdem sich meine Fragen für die Aufgaben regelrecht gehäuft haben.
+Laut ihm sollen wir hier keine Deadlocks beheben sondern nur erkennen und ansonsten halt das ganze "bootleg" zum laufen kriegen.
+Ich finds etwas doof, weil es sich halt sehr sehr schnell in einen Deadlock verhängt und dann auch erstmal so bleibt, aber wir sollen es nicht fixen, also who cares I guess?!
+Einige Ideen zum Fixen (auch ohne Semaphoren) hatte ich schon, also falls Jemand das mal implementieren will just for fun:
+
+    -> 9/10 Threads sind im waiting Zustand, 10-ter Zustand checkt vorm Zustandswechsel, ob alle anderen bereits am warten sind und weckt entweder einen- oder alle.
+        -> Dadurch entsteht ein Livelock. (Die wecken sich dann halt einfach 24/7 auf)
+    -> faire Verteilung der wartezustände ist leider etwas schwieriger. Aktuell ist es so, dass wenn bspw. 3 dudes warten und alle aufgeweckt werden, dann ists à la first come first serve. Das ist nicht cool.
+        Man könnte hier halt über die Thread Priorisierung (oder Semaphoren) das ganze fixen, aber auch ohne sollte das gehen. Bspw. könnte man die halt als "Waiting" Object warten lassen, die haben dann alle ihre schönen Indizes und so.
+        Wenn man dann alle aufweckt, dann geht man die ganze Liste der waiting-Objekte durch und nimmt den, der das kleinste Indiz hat. Boom. (nimmt aber viel Rechenleistung und es geht wie gesagt auch ohne diese ganze Roundabouts)
+
+Da wir das aber alles nicht implementieren sollen, mach ich das erstmal nicht.

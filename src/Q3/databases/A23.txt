@@ -1,0 +1,160 @@
+1.
+SELECT
+    S.SID_1,
+    P.Fach,
+    PA.Status,
+    PA.Note
+FROM
+    Student AS S
+LEFT JOIN
+    Prüfungsanmeldung AS PA
+ON
+    S.SID_1 = PA.SID
+LEFT JOIN
+    Prüfung AS P
+ON
+    PA.PRID = P.PRID
+WHERE
+    PA.Erstversuch IS NULL AND
+    PA.Note IS NOT NULL
+ORDER BY
+    PA.Note
+
+2.
+SELECT
+    S.Name,
+    S.Vorname,
+    S.Wohnort,
+    PA.Note
+FROM
+    Student AS S
+LEFT JOIN
+    Prüfungsanmeldung AS PA
+ON
+    S.SID_1 = PA.SID
+WHERE
+    S.Wohnort LIKE 'Nürnberg' AND
+    (PA.Note < 4 AND PA.Note > 2)
+
+3.
+SELECT
+    V.Fachbezeichnung,
+    PR.Name,
+    PR.Vorname
+FROM
+    Vorlesung AS V
+RIGHT JOIN
+    Professor AS PR
+ON
+    V.PID = PR.PID_1
+ORDER BY
+    V.Fachbezeichnung DESC
+
+4.
+SELECT
+    v.Fachbezeichnung AS 'Übung',
+    TIMEDIFF(UE.Ende, UE.Beginn) AS Dauer
+FROM
+    Übung AS UE
+LEFT JOIN
+    vorlesung AS V
+ON
+    UE.VID = V.VID
+WHERE
+    TIMEDIFF(UE.Ende, UE.Beginn) >= 45
+ORDER BY
+    Dauer
+ASC
+
+5.
+SELECT
+   COUNT(*) AS 'Anzahl der Vorlesungen',
+   TIMEDIFF(V.Ende, V.Beginn) AS Vorlesungsdauer
+FROM
+    vorlesung AS V
+WHERE
+    TIMEDIFF(V.Ende, V.Beginn) IS NOT NULL
+GROUP BY
+    Vorlesungsdauer
+ORDER BY
+    Vorlesungsdauer
+DESC
+
+6.
+SELECT
+    V.Beginn,
+    V.Ende,
+    TIMEDIFF(V.Ende, V.Beginn) AS 'Vorlesungsdauer',
+    V.RaumNr,
+    P.Name,
+    P.Vorname,
+    V.Fachbezeichnung,
+    V.Tag
+FROM
+    vorlesung AS V
+LEFT JOIN
+    professor AS P
+ON
+    V.PID = P.PID_1
+WHERE
+    V.RaumNr IS NOT NULL
+
+7.
+SELECT
+    PR.PID_1 AS ProfessorID,
+    COUNT(S.SID_1) AS StudentID
+FROM
+    professor AS PR
+INNER JOIN
+    (vorlesung AS V LEFT JOIN vorlesungsteilnahme AS VT ON V.VID = VT.VID)
+ON
+    PR.PID_1 = V.PID
+LEFT JOIN
+    Student AS S
+ON
+    VT.SID = S.SID_1
+GROUP BY
+    S.SID_1
+HAVING
+    StudentID < 2
+ORDER BY
+    ProfessorID
+
+    OR
+
+SELECT
+    pr.PID_1 AS ProfessorID,
+    COUNT(s.SID_1) AS StudentCount
+FROM
+    student as s,
+    vorlesungsteilnahme as vt,
+    vorlesung as v,
+    professor as pr
+WHERE
+    s.SID_1 = vt.SID AND
+    vt.VID = v.VID AND
+    pr.PID_1 = v.PID
+GROUP BY
+    s.SID_1
+HAVING
+    StudentCount < 2
+ORDER BY
+    ProfessorID;
+
+8.
+SELECT
+	P.Fach AS Prüfungsfach,
+    AVG(PA.Note) AS Durchschnittsnote,
+    MIN(PA.Note) AS 'Beste Note'
+FROM
+    prüfung AS P,
+    prüfungsanmeldung AS PA
+WHERE
+	P.PRID = PA.PRID
+GROUP BY
+	P.Fach
+HAVING
+	Durchschnittsnote < 3.5
+ORDER BY
+	Durchschnittsnote
+ASC

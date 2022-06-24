@@ -1,0 +1,8 @@
+1.
+    a) SELECT KundenID FROM kunde WHERE kunde.Name == "Meier" AND kunde.Vorname == "Heinz"
+    b) SELECT AuftragsID FROM auftrag WHERE auftrag.Lieferdatum IS NULL
+    c) SELECT Name, Vorname FROM kunde WHERE kunde.Name LIKE 'M%' OR kunde.Name LIKE 'R%'
+    d) SELECT COUNT(DISTINCT Modell) FROM fahrrad
+    e) SELECT Modell FROM auftrag LEFT JOIN kunde ON auftrag.KundenID == kunde.KundenID LEFT JOIN fahrrad ON auftrag.AuftragsID == fahrrad.AuftragsID WHERE kunde.Name = "Meier" AND kunde.Vorname = "Heinz"
+    f) SELECT Bezeichnung, Modell FROM fahrrad LEFT JOIN stueckliste ON fahrrad.StID = stueckliste.StID LEFT JOIN teile ON fahrrad.StID = teile.StID WHERE fahrrad.Modell = "CityRacer"
+

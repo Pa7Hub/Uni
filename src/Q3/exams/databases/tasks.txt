@@ -1,0 +1,33 @@
+B1)
+    I)  Vorteile:
+            - Dateityp ist egal, es wird alles gespeichert/gehalten
+            - Einfache Struktur
+        Nachteile:
+            - Schnell unübersichtlich
+            -
+
+    II)
+        Hierarchisches Modell:
+            Vorteile:
+                - Schnelle Verarbeitungszeit
+                - Einfache Struktur (1 Root, alles andere hängt davon ab)
+            Nachteile:
+                - Schwer zu überarbeiten
+                -
+        Netzwerkmodell:
+            Vorteile:
+                - m:n-Beziehungen sorgen für bessere Struktur und einfacheres Verknüpfen
+                -
+            Nachteile:
+                - Längere Verarbeitungszeit
+
+B2)
+    I)
+        {MatrNr, VorlNr} ist der minimalste Schlüsselkandidat.
+    II)
+        1. NF (X)
+            - nur atomare Attribute
+        2. NF ( )
+            - erste Normalform gegeben
+            - Die Spalten, die nicht voll funtkional vom Schlüssel abhängig sind, befinden sich noch in der Tabelle
+        => keine 2. NF
