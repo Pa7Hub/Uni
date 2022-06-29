@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.*;
 
-public class DBConnector {
+public class DBConnectionEstablisher {
 
     public void connect() throws SQLException, IOException {
         String url = "";
@@ -35,11 +35,11 @@ public class DBConnector {
 
         // the SQL commands
         final String sqlCreate;
-        sqlCreate = "CREATE TABLE tmX (id numeric, greetings text)";
+        sqlCreate = "CREATE TABLE works (id numeric, greetings text)";
         final String sqlInsert;
-        sqlInsert = "INSERT INTO tmX VALUES(1,'Hello FHDW')";
+        sqlInsert = "INSERT INTO works VALUES(1,'Hello FHDW')";
         final String sqlSelect;
-        sqlSelect = "SELECT greetings from tmX";
+        sqlSelect = "SELECT greetings from works";
 
         // create a database connection
         // ( alternatives : properties and user / password )

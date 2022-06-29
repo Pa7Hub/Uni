@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 public class ConnectionTest {
     public static void main(String[] args) {
-        DBConnector connector = new DBConnector();
+        DBConnectionEstablisher connector = new DBConnectionEstablisher();
         try {
             connector.connect();
         } catch (SQLException | IOException throwables) {
