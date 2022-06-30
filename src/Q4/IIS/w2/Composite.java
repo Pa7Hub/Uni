@@ -56,14 +56,13 @@ public class Composite implements Container, Contained {
                 if (contained.equals(content)) return true;
             } else if (contained instanceof Composite) {
                 Composite composite = (Composite) contained;
-                if (composite.getContents().isEmpty()) {
-                    if (composite.equals(content)) return true;
-                } else {
+                if (composite.equals(content)) return true;
+                if (!composite.getContents().isEmpty()) {
                     if (composite.partOfTree(content, composite)) return true;
                 }
             }
         }
-        return true;
+        return false;
     }
 
     @Override
