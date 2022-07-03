@@ -8,30 +8,7 @@ import java.sql.*;
 public class DBConnectionEstablisher {
 
     public void connect() throws SQLException, IOException {
-        String url = "";
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Enter database type: ");
-        String s = br.readLine(); // doesn't care about wrong inputs as of right now
-        if (s.equals("sqlite")) {
-            System.out.println("Enter file name: ");
-            try {
-                url = this.urlBuilder(new SQLiteParameters(s, br.readLine() + ".db"));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else {
-            System.out.println("Enter database name: ");
-            String dbname = br.readLine();
-            System.out.println("Enter user: ");
-            String user = br.readLine();
-            System.out.println("Enter password: ");
-            String password = br.readLine();
-            try {
-                url = this.urlBuilder(new MariaDBOrPostgreSQLParameters(s, dbname, user, password));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+        String url = generateURLFromUserInput();
 
         // the SQL commands
         final String sqlCreate;
@@ -55,6 +32,34 @@ public class DBConnectionEstablisher {
                 }
             }
         }
+    }
+
+    public String generateURLFromUserInput() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String url = "";
+        System.out.println("Enter database type: ");
+        String s = br.readLine(); // doesn't care about wrong inputs as of right now
+        if (s.equals("sqlite")) {
+            System.out.println("Enter file name: ");
+            try {
+                url = this.urlBuilder(new SQLiteParameters(s, br.readLine() + ".db"));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Enter database name: ");
+            String dbname = br.readLine();
+            System.out.println("Enter user: ");
+            String user = br.readLine();
+            System.out.println("Enter password: ");
+            String password = br.readLine();
+            try {
+                url = this.urlBuilder(new MariaDBOrPostgreSQLParameters(s, dbname, user, password));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return url;
     }
 
     /**
