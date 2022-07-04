@@ -51,6 +51,7 @@ public class Composite implements Container, Contained {
     }
 
     public boolean partOfTree(Contained content, Container root) {
+        // FIXME currently doesn't account for the fact that the 'root' is a Composite and also the element to be added. It assumes the 'root' is always a Root instance
         for (Contained contained : root.getContents()) {
             if (contained instanceof Leaf) {
                 if (contained.equals(content)) return true;
