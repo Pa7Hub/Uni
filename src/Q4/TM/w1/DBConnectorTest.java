@@ -8,7 +8,7 @@ public class DBConnectorTest {
 
     @Test
     void urlBuilderBuildsSQLiteCorrectly() {
-        DBConnectionEstablisher connector = new DBConnectionEstablisher();
+        DBConnectionManager connector = new DBConnectionManager();
         SQLiteParameters p = new SQLiteParameters("sqlite", "filename");
         String expected = "jdbc:sqlite:filename";
         String result = "";
@@ -22,7 +22,7 @@ public class DBConnectorTest {
 
     @Test
     void urlBuilderBuildsMariaDBCorrectly() {
-        DBConnectionEstablisher connector = new DBConnectionEstablisher();
+        DBConnectionManager connector = new DBConnectionManager();
         MariaDBOrPostgreSQLParameters p = new MariaDBOrPostgreSQLParameters("mariadb", "dbname1", "user1", "password1");
         String expected = "jdbc:mariadb://localhost/dbname1?user=user1&password=password1";
         String result = "";
@@ -36,7 +36,7 @@ public class DBConnectorTest {
 
     @Test
     void urlBuilderBuildsPostgresqlCorrectly() {
-        DBConnectionEstablisher connector = new DBConnectionEstablisher();
+        DBConnectionManager connector = new DBConnectionManager();
         MariaDBOrPostgreSQLParameters p = new MariaDBOrPostgreSQLParameters("postgresql", "dbname2", "user2", "password2");
         String expected = "jdbc:postgresql://localhost/dbname2?user=user2&password=password2";
         String result = "";

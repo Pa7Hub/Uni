@@ -1,8 +1,5 @@
 package Q4.TM.w2;
 
-import Q4.TM.w1.DBConnectionEstablisher;
-
-import java.io.IOException;
 import java.sql.*;
 
 public class SimpleBankTransfer {
@@ -70,8 +67,8 @@ public class SimpleBankTransfer {
      * When run, you will see that it only adds 1000 instead of 2000
      */
     public void lostUpdateExample() throws SQLException {
-        BankBreakingThread thread1 = new BankBreakingThread(this._url, "A", this._url);
-        BankBreakingThread thread2 = new BankBreakingThread(this._url, "A", this._url);
+        BankBreakingThread thread1 = new BankBreakingThread("A", this._url);
+        BankBreakingThread thread2 = new BankBreakingThread("A", this._url);
 
         thread1.start();
         thread2.start();

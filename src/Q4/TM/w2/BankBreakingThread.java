@@ -3,16 +3,14 @@ package Q4.TM.w2;
 import java.sql.*;
 
 /**
- * Will create a connection to the bank.db database and just go crazy
+ * Will establish a connection to the database and finish one transaction
  */
 public class BankBreakingThread extends Thread {
     Connection _connection;
     String _account;
-    String _url;
 
-    public BankBreakingThread(String url, String account, String connectionURL) throws SQLException {
+    public BankBreakingThread(String account, String connectionURL) throws SQLException {
         System.out.println("Thread has been created");
-        this._url = url;
         this._account = "'" + account + "'";
         this._connection = DriverManager.getConnection(connectionURL);
     }
@@ -45,5 +43,4 @@ public class BankBreakingThread extends Thread {
             throwables.printStackTrace();
         }
     }
-
 }
