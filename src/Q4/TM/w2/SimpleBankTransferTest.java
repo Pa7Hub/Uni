@@ -10,7 +10,7 @@ public class SimpleBankTransferTest {
     @Test
     void creatingAccountsWorks() throws SQLException {
         SimpleBankTransfer sbt = new SimpleBankTransfer();
-//        sbt.createTable(); // commented out to not always create the table
+        sbt.createTable(); // commented out to not always create the table
         sbt.createAccounts();
     }
 

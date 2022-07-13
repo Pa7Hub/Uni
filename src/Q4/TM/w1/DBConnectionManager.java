@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.*;
+import java.util.Properties;
 
 /**
  * A DBConnectionManager helps with executing a handful of tasks on a database via a established Connection.
@@ -154,11 +155,21 @@ public class DBConnectionManager {
         String url = this.generateURLFromUserInput();
         try (Connection connection = this.establishConnectionFromURL(url)) {
             this.setConnection(connection);
+            connection.setAutoCommit(false);
             return connection;
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public void closeConnection() {
+        try {
+            this._connection.close();
+            System.out.println("Connection has been closed");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     /**
@@ -193,7 +204,9 @@ public class DBConnectionManager {
     }
 
     private Connection establishConnectionFromURL(String url) throws SQLException {
-        return DriverManager.getConnection(url);
+        Properties properties = new Properties();
+        properties.put("connectionTimeout", "2000");
+        return DriverManager.getConnection(url, properties);
     }
 
     public void setConnection(Connection connection) {
