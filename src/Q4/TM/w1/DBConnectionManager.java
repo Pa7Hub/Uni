@@ -151,9 +151,10 @@ public class DBConnectionManager {
      * Be careful with using this as of right now, it does not account for a lot of input mistakes
      * Will automatically save the Connection within the DBCManager!
      */
-    public Connection establishConnectionFromUserInput() throws IOException {
+    public Connection establishConnectionFromUserInput() throws IOException, SQLException {
         String url = this.generateURLFromUserInput();
-        try (Connection connection = this.establishConnectionFromURL(url)) {
+        Connection connection = this.establishConnectionFromURL(url);
+        try {
             this.setConnection(connection);
             connection.setAutoCommit(false);
             return connection;
