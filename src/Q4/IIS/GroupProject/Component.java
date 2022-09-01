@@ -4,10 +4,12 @@ import java.util.Optional;
 
 public abstract class Component {
     private String _name;
+    private String _type;
     private Optional<Component> _parent;
 
-    public Component(String name) {
+    public Component(String name, String type) {
         this._name = name;
+        this._type = type;
     }
 
     public String getName() {
@@ -20,5 +22,9 @@ public abstract class Component {
 
     public Optional<Component> getParent() {
         return this._parent;
+    }
+
+    public String getType() {
+        return this._type;
     }
 }

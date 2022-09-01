@@ -11,13 +11,17 @@ public class Composite extends Component {
     }
 
     public Composite(String name) {
-        super(name);
+        super(name, "Composite");
         this._components = new ArrayList<>();
     }
 
     public void addToList(Component component) {
         component.addParent(this);
         this._components.add(component);
+    }
+
+    public List<Component> getList() {
+        return this._components;
     }
 
     // Will return true if this component is the root of a given tree
@@ -32,10 +36,11 @@ public class Composite extends Component {
      */
     public void addElementsToNDepth(int depth) {
         ComponentFactory f = new ComponentFactory();
+        CompositeFactory cf = (CompositeFactory) f.createFactory(Operation.COMPOSITE);
         Composite currentElement = this;
         int i;
         for (i = 0; i <= depth; i++) {
-            Composite c = (Composite) f.create(Operation.COMPOSITE, "Composite " + i, 0);
+            Composite c = cf.create(String.valueOf(i + 2));
             currentElement.addToList(c);
             currentElement = c;
         }

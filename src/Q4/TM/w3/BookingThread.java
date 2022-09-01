@@ -13,7 +13,7 @@ public class BookingThread extends Thread {
 
     public void runTransaction(ITransaction transaction) {
         try {
-            this._manager.getConnection().setAutoCommit(false);
+//            this._manager.getConnection().setAutoCommit(false);
             transaction.run(this._manager); // Currently doesn't throw an exception
             this._manager.getConnection().commit();
         } catch (Exception e) {
