@@ -30,7 +30,6 @@ public class XMIGenerator {
     private void generateHeaderAndFooter(Component tree, File file) {
         try {
             FileWriter w = new FileWriter(file);
-            // TODO here should be all the code to generate the actual composites etc.
             this.generateHeader(w, tree.getType(), tree);
             // We have to instanceof here again because otherwise we'd be executing the code for a Leaf aswell
             if (tree instanceof Composite) {
