@@ -6,6 +6,10 @@ public abstract class Component {
     private String _name;
     private Optional<Component> _parent;
 
+    public Component(String name) {
+        this._name = name;
+    }
+
     public String getName() {
         return this._name;
     }

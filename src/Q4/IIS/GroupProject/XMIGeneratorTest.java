@@ -9,6 +9,6 @@ public class XMIGeneratorTest {
     void test() {
         XMIGenerator gen = new XMIGenerator();
         ComponentFactory fac = new ComponentFactory();
-        gen.generateFile(fac.create(Operation.LEAF, 1));
+        gen.generateFile(fac.create(Operation.LEAF, "Cool Leaf", 1));
     }
 }
