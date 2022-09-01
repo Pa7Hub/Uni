@@ -56,7 +56,7 @@ public class XMIGenerator {
                     w.write("</components>\n");
                 } else if (e instanceof Leaf) {
                     Leaf l = (Leaf) e;
-                    w.write(" size=\"" + l.getSize() + "\">\n");
+                    w.write(">\n");
                     w.write("</components>\n");
                 }
             } catch (IOException ioException) {
@@ -75,7 +75,6 @@ public class XMIGenerator {
             if (type.equals("Leaf")) {
                 Leaf l = (Leaf) tree;
                 w.write("\txmlns=\"platform:/resource/Component2List/Metamodels/MMComponent.ecore\"\n");
-                w.write("\tsize=\"" + l.getSize() + "\"\n");
                 w.write("\tname=\"" + l.getName() + "\">\n");
             } else {
                 w.write("\txmlns=\"platform:/resource/Component2List/Metamodels/MMComponent.ecore\"\n");

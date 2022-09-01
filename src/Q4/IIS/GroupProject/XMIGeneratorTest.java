@@ -14,13 +14,13 @@ public class XMIGeneratorTest {
         LeafFactory lf = (LeafFactory) fac.createFactory(Operation.LEAF);
         String name = "generatedTree";
         Composite tree = cf.create("1");
-//        tree.addToList(cf.create("2"));
-//        Composite branch = cf.create("3");
-//        branch.addToList(lf.create("1", 7));
-//        tree.addToList(branch);
-//        tree.addToList(lf.create("1", 7));
+        tree.addToList(cf.create("2"));
+        Composite branch = cf.create("3");
+        branch.addToList(lf.create("1"));
+        tree.addToList(branch);
+        tree.addToList(lf.create("1"));
         tree.addElementsToNDepth(20);
 
-        gen.generateFile(tree, "pleaseWork");
+        gen.generateFile(tree, "newCoolTree");
     }
 }
