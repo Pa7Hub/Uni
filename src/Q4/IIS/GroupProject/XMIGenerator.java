@@ -1,12 +1,12 @@
 package Q4.IIS.GroupProject;
 
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
 /*
     Class to generate a .xmi File from a given tree structure
+    Conforms to our Component2List Metamodel
  */
 public class XMIGenerator {
 
@@ -46,6 +46,8 @@ public class XMIGenerator {
         }
     }
 
+    // Generates the main content from the given Composite tree
+    // Will indent the lines depending on their depth tree-wise
     private void generateContent(FileWriter w, Composite c, Integer depth) {
         c.getList().forEach((e) -> {
             try {
@@ -66,10 +68,10 @@ public class XMIGenerator {
         });
     }
 
+    // Generates the Header content for the .xmi file
     private void generateHeader(FileWriter w, String type, Component tree) {
         try {
             w.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
-            // This sucks but whatever
             w.write("<" + type + " xmi:version=\"2.0\"\n");
             w.write("\txmlns:xmi=\"http://www.omg.org/XMI\"\n");
             w.write("\txmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n");
@@ -87,6 +89,9 @@ public class XMIGenerator {
         }
     }
 
+    // Will generate a string consisting of n "\t" appended after each other
+    // Will throw IndexOutOfBounds Exception for n < 0
+    // FIXME public for testing
     public String generateNTabulators(Integer n) {
        return new String(new char[n]).replace("\0", "\t");
     }

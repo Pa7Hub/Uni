@@ -1,6 +1,5 @@
 package Q4.IIS.GroupProject;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -13,14 +12,14 @@ public class XMIGeneratorTest {
         CompositeFactory cf = (CompositeFactory) fac.createFactory(Operation.COMPOSITE);
         LeafFactory lf = (LeafFactory) fac.createFactory(Operation.LEAF);
         Composite tree = cf.create("1");
-//        tree.addToList(cf.create("2"));
-//        Composite branch = cf.create("3");
-//        branch.addToList(lf.create("1"));
-//        tree.addToList(branch);
-//        tree.addToList(lf.create("1"));
-        tree.addElementsToNDepth(200, 20);
+        tree.addToList(cf.create("2"));
+        Composite branch = cf.create("3");
+        branch.addToList(lf.create("1"));
+        tree.addToList(branch);
+        tree.addToList(lf.create("1"));
+//        tree.addElementsToNDepth(500, 50);
 
-        gen.generateFile(tree, "BigTree");
+        gen.generateFile(tree, "test");
     }
 
     @Test

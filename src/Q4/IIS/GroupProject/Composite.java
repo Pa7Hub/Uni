@@ -30,7 +30,10 @@ public class Composite extends Component {
     }
 
     /**
-     * Will add a singular element to each layer until layer n is reached
+     * Will add a singular element to each layer until layer n is reached, with m amount of elements per layer
+     * For each element per layer it has a 80% chance to generate a Leaf and 20% to generate a Composite
+     *      If a Composite happens to be generated, it will also create anywhere from 0 to 10 Leaf or Composites for that Composite
+     *      The same rules as above apply to the Composite elements as well
      * This is useful for creating bloated trees for tests
      * @param depth defines how many layers deep shall be created
      * @param perLayer defines how many Component elements shall be created for given layer
