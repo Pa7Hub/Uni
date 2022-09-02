@@ -5,6 +5,7 @@ import java.util.Optional;
 public abstract class Component {
     private String _name;
     private String _type;
+    private Integer _depth;
     private Optional<Component> _parent;
 
     public Component(String name, String type) {
@@ -18,6 +19,14 @@ public abstract class Component {
 
     public void addParent(Component parent) {
         this._parent = Optional.of(parent);
+    }
+
+    public void addDepth(Integer depth) {
+        this._depth = depth;
+    }
+
+    public Integer getDepth() {
+        return this._depth;
     }
 
     public Optional<Component> getParent() {

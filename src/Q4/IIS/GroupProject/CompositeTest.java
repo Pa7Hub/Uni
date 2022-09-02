@@ -8,7 +8,7 @@ public class CompositeTest {
     @Test
     void depthTest() {
         Composite c = new Composite("Cool name");
-        c.addElementsToNDepth(20);
+        c.addElementsToNDepth(20, 5);
         System.out.println(c);
     }
 }

@@ -32,17 +32,34 @@ public class Composite extends Component {
     /**
      * Will add a singular element to each layer until layer n is reached
      * This is useful for creating bloated trees for tests
-     * @param depth
+     * @param depth defines how many layers deep shall be created
+     * @param perLayer defines how many Component elements shall be created for given layer
      */
-    public void addElementsToNDepth(int depth) {
+    public void addElementsToNDepth(int depth, Integer perLayer) {
         ComponentFactory f = new ComponentFactory();
         CompositeFactory cf = (CompositeFactory) f.createFactory(Operation.COMPOSITE);
         Composite currentElement = this;
         int i;
         for (i = 0; i <= depth; i++) {
             Composite c = cf.create(String.valueOf(i + 2));
+            this.addNRandomElementsToComposite(perLayer, i+1, c);
             currentElement.addToList(c);
             currentElement = c;
+        }
+    }
+
+    public void addNRandomElementsToComposite(Integer amount, Integer depth ,Composite c) {
+        ComponentFactory f = new ComponentFactory();
+        CompositeFactory cf = (CompositeFactory) f.createFactory(Operation.COMPOSITE);
+        LeafFactory lf = (LeafFactory) f.createFactory(Operation.LEAF);
+        for (int i = 0; i < amount; i++) {
+            if (Math.random() > 0.2) {
+                c.addToList(lf.create(depth + ".L" + (i + 1)));
+            } else {
+                Composite tempComposite = cf.create(depth + ".C" + (i + 2));
+                this.addNRandomElementsToComposite((int) (Math.random() * 10), depth+1, tempComposite);
+                c.addToList(tempComposite);
+            }
         }
     }
 }
