@@ -51,7 +51,7 @@ public class Composite extends Component {
         }
     }
 
-    public void addNRandomElementsToComposite(Integer amount, Integer depth ,Composite c) {
+    public void addNRandomElementsToComposite(Integer amount, Integer depth, Composite c) {
         ComponentFactory f = new ComponentFactory();
         CompositeFactory cf = (CompositeFactory) f.createFactory(Operation.COMPOSITE);
         LeafFactory lf = (LeafFactory) f.createFactory(Operation.LEAF);
