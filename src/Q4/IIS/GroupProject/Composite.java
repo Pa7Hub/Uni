@@ -34,7 +34,8 @@ public class Composite extends Component {
      * For each element per layer it has a 80% chance to generate a Leaf and 20% to generate a Composite
      *      If a Composite happens to be generated, it will also create anywhere from 0 to 10 Leaf or Composites for that Composite
      *      The same rules as above apply to the Composite elements as well
-     * This is useful for creating bloated trees for tests
+     * This is useful for creating bloated trees for tests.
+     * The resulting tree will have the depth 'depth+1' as it will have 'n many layers below the root element'.
      * @param depth defines how many layers deep shall be created
      * @param perLayer defines how many Component elements shall be created for given layer
      */
@@ -43,24 +44,24 @@ public class Composite extends Component {
         CompositeFactory cf = (CompositeFactory) f.createFactory(Operation.COMPOSITE);
         Composite currentElement = this;
         int i;
-        for (i = 0; i <= depth; i++) {
+        for (i = 0; i < depth; i++) {
             Composite c = cf.create(String.valueOf(i + 2));
-            this.addNRandomElementsToComposite(perLayer, i+1, c);
+            this.addNRandomElementsToComposite(perLayer, i+1, c, depth);
             currentElement.addToList(c);
             currentElement = c;
         }
     }
 
-    public void addNRandomElementsToComposite(Integer amount, Integer depth, Composite c) {
+    private void addNRandomElementsToComposite(Integer amount, Integer depth, Composite c, int initialDepth) {
         ComponentFactory f = new ComponentFactory();
         CompositeFactory cf = (CompositeFactory) f.createFactory(Operation.COMPOSITE);
         LeafFactory lf = (LeafFactory) f.createFactory(Operation.LEAF);
         for (int i = 0; i < amount; i++) {
-            if (Math.random() > 0.2) {
+            if (Math.random() > 0.2 || depth >= initialDepth) {
                 c.addToList(lf.create(depth + ".L" + (i + 1)));
             } else {
                 Composite tempComposite = cf.create(depth + ".C" + (i + 2));
-                this.addNRandomElementsToComposite((int) (Math.random() * 10), depth+1, tempComposite);
+                this.addNRandomElementsToComposite((int) (Math.random() * 10), depth+1, tempComposite, initialDepth);
                 c.addToList(tempComposite);
             }
         }

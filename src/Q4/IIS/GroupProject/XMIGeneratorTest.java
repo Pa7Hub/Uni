@@ -56,6 +56,13 @@ public class XMIGeneratorTest {
     }
 
     @Test
+    void generateSmallRandomTree() {
+        Composite tree = cf.create("1");
+        tree.addElementsToNDepth(5, 3);
+        gen.generateFile(tree, "smallRandomTree");
+    }
+
+    @Test
     void generateMediumTree() {
         Composite tree = cf.create("1");
         tree.addElementsToNDepth(50, 5);
