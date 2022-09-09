@@ -7,6 +7,10 @@ import java.io.IOException;
 /*
     Class to generate a .xmi File from a given tree structure
     Conforms to our Component2List Metamodel
+
+    TODO The way cleaner version to do this, is to implement a "xmi format" for each class and then just generate the .xmi file from those, instead of hardcoding the xmi code here
+     that would mean that any structure, even the non-tree ones can be generated with the generator.
+     However as this was simply made for a tree .xmi file, I will probably not update this to a "universal" .xmi generator
  */
 public class XMIGenerator {
 
